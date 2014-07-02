@@ -41,7 +41,7 @@ def update_karma(bot, trigger, amount):
 		#if the person calling it is also the victim, we decrease their karma
 		if(victim == triggerUser):
 			amount = -1
-		if(victim == 'natsmith' or victim == 'intern'):
+		if(victim == 'intern'):
 			amount = 1
 		try:
 			karma = int(get_karma(table, victim))
