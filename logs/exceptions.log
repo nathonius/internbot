@@ -1,0 +1,114 @@
+Signature: TypeError: expected string or buffer (file "/usr/lib/python2.7/re.py", line 177, in findall)
+from #botTest at 2014-07-01 14:34:16.618223:
+Message was: <natsmith> .roll
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/willie/bot.py", line 731, in call
+    exit_code = func(willie, trigger)
+  File "/usr/local/lib/python2.7/dist-packages/willie/modules/dice.py", line 175, in roll
+    dice_expressions = re.findall(dice_regexp, arg_str)
+  File "/usr/lib/python2.7/re.py", line 177, in findall
+    return _compile(pattern, flags).findall(string)
+TypeError: expected string or buffer
+----------------------------------------
+
+Signature: TypeError: unsupported operand type(s) for -: 'str' and 'str' (file "/home/natsmith/.willie/modules/karma.py", line 220, in meet_karma)
+from #botTest at 2014-07-01 15:34:01.672530:
+Message was: <natsmith> shpurk++
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/willie/bot.py", line 731, in call
+    exit_code = func(willie, trigger)
+  File "/home/natsmith/.willie/modules/karma.py", line 246, in meet_promote_karma
+    return meet_karma(bot, trigger, parse_promote, promote_karma)
+  File "/home/natsmith/.willie/modules/karma.py", line 220, in meet_karma
+    if(time.ctime()-last < 10):
+TypeError: unsupported operand type(s) for -: 'str' and 'str'
+----------------------------------------
+
+Signature: TypeError: unsupported operand type(s) for -: 'str' and 'str' (file "/home/natsmith/.willie/modules/karma.py", line 220, in meet_karma)
+from #botTest at 2014-07-01 15:34:23.369376:
+Message was: <shpurk> intern--
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/willie/bot.py", line 731, in call
+    exit_code = func(willie, trigger)
+  File "/home/natsmith/.willie/modules/karma.py", line 252, in meet_demote_karma
+    return meet_karma(bot, trigger, parse_demote, demote_karma)
+  File "/home/natsmith/.willie/modules/karma.py", line 220, in meet_karma
+    if(time.ctime()-last < 10):
+TypeError: unsupported operand type(s) for -: 'str' and 'str'
+----------------------------------------
+
+Signature: IndexError: no such group (file "/home/natsmith/.willie/modules/natsmith_karma.py", line 5, in increase_karma)
+from #botTest at 2014-07-01 17:51:03.581210:
+Message was: <natsmith> intern++
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/willie/bot.py", line 731, in call
+    exit_code = func(willie, trigger)
+  File "/home/natsmith/.willie/modules/natsmith_karma.py", line 5, in increase_karma
+    bot.say(str(trigger.group(2)))
+IndexError: no such group
+----------------------------------------
+
+Signature: TypeError: can only concatenate list (not "unicode") to list (file "/usr/local/lib/python2.7/dist-packages/willie/db.py", line 514, in _get_one)
+from #botTest at 2014-07-02 08:55:54.814541:
+Message was: <natsmith> intern++
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/willie/bot.py", line 731, in call
+    exit_code = func(willie, trigger)
+  File "/home/natsmith/.willie/modules/natsmith_karma.py", line 52, in increase_karma
+    update_karma(bot, trigger, 1)
+  File "/home/natsmith/.willie/modules/natsmith_karma.py", line 32, in update_karma
+    last = get_last(table, triggerUser)
+  File "/home/natsmith/.willie/modules/natsmith_karma.py", line 20, in get_last
+    last_time = table.get(triggerUser, 'last', 'victim')
+  File "/usr/local/lib/python2.7/dist-packages/willie/db.py", line 570, in get
+    return self._get_one(row, columns, key)
+  File "/usr/local/lib/python2.7/dist-packages/willie/db.py", line 514, in _get_one
+    raise KeyError(row + ' not in database')
+TypeError: can only concatenate list (not "unicode") to list
+----------------------------------------
+
+Signature: IntegrityError: NOT NULL constraint failed: nkarma.victim (file "/usr/local/lib/python2.7/dist-packages/willie/db.py", line 610, in update)
+from #botTest at 2014-07-02 09:01:02.348191:
+Message was: <natsmith> intern++
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/willie/bot.py", line 731, in call
+    exit_code = func(willie, trigger)
+  File "/home/natsmith/.willie/modules/natsmith_karma.py", line 58, in increase_karma
+    update_karma(bot, trigger, 1)
+  File "/home/natsmith/.willie/modules/natsmith_karma.py", line 53, in update_karma
+    table.update(triggerUser, columns, 'last')
+  File "/usr/local/lib/python2.7/dist-packages/willie/db.py", line 610, in update
+    cur.execute(command)
+IntegrityError: NOT NULL constraint failed: nkarma.victim
+----------------------------------------
+
+Signature: IntegrityError: UNIQUE constraint failed: nkarma.victim (file "/usr/local/lib/python2.7/dist-packages/willie/db.py", line 610, in update)
+from #botTest at 2014-07-02 09:02:17.532085:
+Message was: <natsmith> intern++
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/willie/bot.py", line 731, in call
+    exit_code = func(willie, trigger)
+  File "/home/natsmith/.willie/modules/natsmith_karma.py", line 58, in increase_karma
+    update_karma(bot, trigger, 1)
+  File "/home/natsmith/.willie/modules/natsmith_karma.py", line 53, in update_karma
+    table.update(triggerUser, columns, 'last')
+  File "/usr/local/lib/python2.7/dist-packages/willie/db.py", line 610, in update
+    cur.execute(command)
+IntegrityError: UNIQUE constraint failed: nkarma.victim
+----------------------------------------
+
+Signature: IntegrityError: UNIQUE constraint failed: nkarma.victim (file "/usr/local/lib/python2.7/dist-packages/willie/db.py", line 610, in update)
+from #botTest at 2014-07-02 09:03:22.165017:
+Message was: <natsmith> intern++
+Traceback (most recent call last):
+  File "/usr/local/lib/python2.7/dist-packages/willie/bot.py", line 731, in call
+    exit_code = func(willie, trigger)
+  File "/home/natsmith/.willie/modules/natsmith_karma.py", line 58, in increase_karma
+    update_karma(bot, trigger, 1)
+  File "/home/natsmith/.willie/modules/natsmith_karma.py", line 53, in update_karma
+    table.update(triggerUser, columns)
+  File "/usr/local/lib/python2.7/dist-packages/willie/db.py", line 610, in update
+    cur.execute(command)
+IntegrityError: UNIQUE constraint failed: nkarma.victim
+----------------------------------------
+
