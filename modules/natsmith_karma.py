@@ -31,7 +31,7 @@ def update_karma(bot, trigger, amount):
 	victim = get_victim(trigger, amount)
 	triggerUser = trigger.nick
 	try:
-		last = get_last(table, triggerUser)
+		last = int(get_last(table, triggerUser))
 	except:
 		last = 0
 	#prevent flooding
@@ -41,7 +41,7 @@ def update_karma(bot, trigger, amount):
 		#if the person calling it is also the victim, we decrease their karma
 		if(victim == triggerUser):
 			amount = -1
-		if(victim == 'intern'):
+		if(victim == 'intern' or victim == 'intern2'):
 			amount = 1
 		try:
 			karma = int(get_karma(table, victim))
@@ -56,11 +56,11 @@ def update_karma(bot, trigger, amount):
 		table.update(triggerUser, columns)
 		bot.say(victim+' now has '+str(karma)+' point(s) of karma')
 
-@willie.module.rule(r'^.*[\w][\S]+[\+\+]')
+@willie.module.rule(r'^.*[\w][\S]+(\+\+)')
 def increase_karma(bot, trigger):
 	update_karma(bot, trigger, 1)
 
-@willie.module.rule(r'^.*[\w][\S]+[\-\-]')
+@willie.module.rule(r'^.*[\w][\S]+(\-\-)')
 def decrease_karma(bot, trigger):
 	update_karma(bot, trigger, -1)
 
@@ -75,3 +75,5 @@ def report_karma(bot, trigger):
 	if(karma == None):
 		karma = 0
 	bot.say(victim+' has '+str(karma)+' point(s) of karma')
+
+
