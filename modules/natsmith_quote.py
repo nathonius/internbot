@@ -71,7 +71,10 @@ def add_quote(bot, trigger):
 	except:
 		return
 	quote_string = get_quote_string(trigger)
-	(quote, time) = find_quote(victim, quote_string)
+	try:
+		(quote, time) = find_quote(victim, quote_string)
+	except:
+		quote = '//QUOTENOTFOUND//'
 	if(quote == '//QUOTENOTFOUND//'):
 		bot.say(victim+' did not say "'+quote_string+'".')
 	else:
