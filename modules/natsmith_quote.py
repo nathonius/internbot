@@ -63,7 +63,10 @@ def find_quote(victim, quote_string):
 @willie.module.rule(r'^addquote')
 def add_quote(bot, trigger):
 	table = bot.db.nquote
-	victim = get_victim(trigger)
+	try:
+		victim = get_victim(trigger)
+	except:
+		return
 	quote_string = get_quote_string(trigger)
 	(quote, time) = find_quote(victim, quote_string)
 	if(quote == '//QUOTENOTFOUND//'):
@@ -78,7 +81,10 @@ def add_quote(bot, trigger):
 @willie.module.rule(r'^quote')
 def quote(bot, trigger):
 	table = bot.db.nquote
-	victim = get_victim(trigger)
+	try:
+		victim = get_victim(trigger)
+	except:
+		return
 	try:
 		(quote, time) = get_quote(table, victim)
 	except:
