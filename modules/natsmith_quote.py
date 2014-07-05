@@ -30,8 +30,6 @@ def check_victim(line, victim):
 	return (victim == found_victim)
 
 def parse_quote(line, victim):
-	if not check_victim(line, victim):
-		return ('//QUOTENOTFOUND//', '0')
 	time_str = line.split()[0]
 	time_str = float(time_str[2:])
 	time_obj = time.localtime(time_str)
@@ -52,7 +50,7 @@ def find_quote(victim, quote_string):
 	log = open(log_path, 'r')
 	possible_lines = []
 	for line in log:
-		if('PRIVMSG' in str(line) and str(victim) in str(line) and 'addquote' not in str(line)):
+		if('PRIVMSG' in str(line) and str(victim) in str(line) and 'addquote' not in str(line) and check_victim(str(line), victim)):
 			possible_lines.append(str(line))
 	possible = len(possible_lines)-1
 	if(str(quote_string) == ""):
