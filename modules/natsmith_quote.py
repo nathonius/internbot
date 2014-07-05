@@ -24,8 +24,10 @@ def get_quote_string(trigger):
 	return quote_string
 
 def check_victim(line, victim):
-	line = line.split()
-	return victim in line[1]
+	victim_pos = str(line).find(':')+1
+	end_pos = str(line).find('!')
+	found_victim = str(line)[victim_pos:end_pos]
+	return (victim == found_victim)
 
 def parse_quote(line, victim):
 	if not check_victim(line, victim):
@@ -47,12 +49,15 @@ def find_quote(victim, quote_string):
 	script_dir = os.path.dirname(__file__)
 	willie_dir = os.path.dirname(script_dir)
 	log_path = os.path.join(willie_dir, "logs/raw.log")
-	log = open(log_path)
+	log = open(log_path, 'r')
 	possible_lines = []
 	for line in log:
 		if('PRIVMSG' in str(line) and str(victim) in str(line) and 'addquote' not in str(line)):
 			possible_lines.append(str(line))
 	possible = len(possible_lines)-1
+	if(str(quote_string) == ""):
+		(quote, time) = parse_quote(possible_lines[-1], victim)
+		return (quote, time)
 	for i in range(possible, -1, -1):
 		if(str(quote_string).lower() in str(possible_lines[i]).lower()):
 			(quote, time) = parse_quote(possible_lines[i], victim)
