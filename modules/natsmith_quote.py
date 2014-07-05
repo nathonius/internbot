@@ -54,7 +54,7 @@ def find_quote(victim, quote_string):
 			possible_lines.append(str(line))
 	possible = len(possible_lines)-1
 	for i in range(possible, -1, -1):
-		if(str(quote_string) in str(possible_lines[i])):
+		if(str(quote_string).lower() in str(possible_lines[i]).lower()):
 			(quote, time) = parse_quote(possible_lines[i], victim)
 			return (quote, time)
 	return ('//QUOTENOTFOUND//', '0')
