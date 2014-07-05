@@ -20,6 +20,7 @@ def get_quote(table, victim):
 def get_quote_string(trigger):
 	msg = trigger.bytes.split()
 	quote_string = " ".join(msg[2:])
+	quote_string = quote_string.strip('\"\'')
 	return quote_string
 
 def check_victim(line, victim):
