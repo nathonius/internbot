@@ -27,7 +27,15 @@ def check_victim(line, victim):
 	victim_pos = str(line).find(':')+1
 	end_pos = str(line).find('!')
 	found_victim = str(line)[victim_pos:end_pos]
-	return (victim == found_victim)
+	return (str(victim) == str(found_victim))
+
+def escape(quote):
+	newquote = quote.replace("'", "''")
+	return newquote
+
+def unescape(quote):
+	newquote = quote.replace("''", "'")
+	return newquote
 
 def parse_quote(line, victim):
 	time_str = line.split()[0]
@@ -60,7 +68,7 @@ def find_quote(victim, quote_string):
 		if(str(quote_string).lower() in str(possible_lines[i]).lower()):
 			(quote, time) = parse_quote(possible_lines[i], victim)
 			return (quote, time)
-	return ('//QUOTENOTFOUND//', '0')
+	return ('QUOTENOTFOUND', '0')
 
 
 @willie.module.rule(r'^addquote')
@@ -73,13 +81,16 @@ def add_quote(bot, trigger):
 	quote_string = get_quote_string(trigger)
 	try:
 		(quote, time) = find_quote(victim, quote_string)
+		quote = escape(quote)
 	except:
-		quote = '//QUOTENOTFOUND//'
-	if(quote == '//QUOTENOTFOUND//'):
+		quote = 'QUOTENOTFOUND'
+	if(quote == 'QUOTENOTFOUND'):
 		bot.say(victim+' did not say "'+quote_string+'".')
 	else:
-		columns = {'quote':quote, 'time':time}
+		columns = {'quote':str(quote), 'time':str(time), 'victim':str(victim)}
+		#bot.say('quote: '+str(quote)+', time: '+str(time)+', victim: '+str(victim))
 		table.update(victim, columns)
+		quote = unescape(quote)
 		bot.say('Remembered quote "'+quote+'" -- '+victim)
 
 
