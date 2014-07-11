@@ -76,4 +76,22 @@ def report_karma(bot, trigger):
 		karma = 0
 	bot.say(victim+' has '+str(karma)+' point(s) of karma')
 
-
+@willie.module.commands('top', 'topkarma', 'karmatop')
+def top(bot, trigger):
+	table = bot.db.nkarma
+	victims = []
+	allkeys = table.keys('victim')
+	for key in allkeys:
+		try:
+			(victim, karma) = table.get(key[0], ('victim', 'karma'))
+		except:
+			pass
+		else:
+			victims.append((victim, karma))
+	victims.sort(key=lambda tup: tup[1], reverse=True)
+	bot.say("Top 5 karma:")
+	for i in range(5):
+		(victim, karma) = victims[i]
+		if(karma == None):
+			(victim, karma) = (victim, 0)
+		bot.say(str(i+1)+". "+str(victim)+", "+str(karma)+" points")
