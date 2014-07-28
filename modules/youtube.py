@@ -140,10 +140,10 @@ def ytsearch(bot, trigger):
         bot.say("Sorry, I couldn't find the video you are looking for")
         return
     message = ('[YT Search] Title: ' + video_info['title'] +
-              ' | Uploader: ' + video_info['uploader'] +
-              ' | Duration: ' + video_info['length'] +
-              ' | Uploaded: ' + video_info['uploaded'] +
-              ' | Views: ' + video_info['views'] +
+              #' | Uploader: ' + video_info['uploader'] +
+              #' | Duration: ' + video_info['length'] +
+              #' | Uploaded: ' + video_info['uploaded'] +
+              #' | Views: ' + video_info['views'] +
               ' | Link: ' + video_info['link'])
 
     bot.say(HTMLParser().unescape(message))
