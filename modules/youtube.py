@@ -11,6 +11,7 @@ http://willie.dfbta.net
 This module will respond to .yt and .youtube commands and searches the youtubes.
 """
 from __future__ import unicode_literals
+import unicodedata
 
 from willie import web, tools
 from willie.module import rule, commands, example
@@ -139,6 +140,11 @@ def ytsearch(bot, trigger):
     if video_info['link'] == 'N/A':
         bot.say("Sorry, I couldn't find the video you are looking for")
         return
+
+    if 'music-share' in trigger.sender:
+        with open('links.txt', 'a') as f:
+            f.write(str(video_info['link']) + "\t" + str(video_info['title']) + "\n")
+
     message = ('[YT Search] Title: ' + video_info['title'] +
               #' | Uploader: ' + video_info['uploader'] +
               #' | Duration: ' + video_info['length'] +
@@ -162,10 +168,16 @@ def ytinfo(bot, trigger, found_match=None):
     if video_info is 'err':
         return
 
+    video_info["title"] = unicodedata.normalize('NFKD', video_info["title"]).encode('ascii', 'ignore')
+
+    if 'music-share' in trigger.sender:
+        with open('links.txt', 'a') as f:
+            f.write(str(video_info['link']) + "\t" + str(video_info['title']) + "\n")
+
     #combine variables and print
-    message = '[YouTube] Title: ' + video_info['title'] + \
-              ' | Uploader: ' + video_info['uploader'] + \
-              ' | Duration: ' + video_info['length']# + \
+    message = '[YouTube] Title: ' + video_info['title'] #+ \
+              #' | Uploader: ' + video_info['uploader'] + \
+              #' | Duration: ' + video_info['length']# + \
               #' | Uploaded: ' + video_info['uploaded'] + \
               #' | Views: ' + video_info['views'] + \
               #' | Comments: ' + video_info['comments'] + \
