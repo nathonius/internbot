@@ -141,6 +141,8 @@ def ytsearch(bot, trigger):
         bot.say("Sorry, I couldn't find the video you are looking for")
         return
 
+    video_info["title"] = unicodedata.normalize('NFKD', video_info["title"]).encode('ascii', 'ignore')
+
     if 'music-share' in trigger.sender:
         with open('links.txt', 'a') as f:
             f.write(str(video_info['link']) + "\t" + str(video_info['title']) + "\n")
